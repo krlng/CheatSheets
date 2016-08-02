@@ -1,11 +1,25 @@
 # Python CheatSheet
 
-## Load data
+## Basics
+#### Load data
 ``` python
 import os
 
 #Load classes from custom file sqlalchemy_declarative.py in same folder
 from sqlalchemy_declarative import Base, Person
+```
+
+#### Analyse objects
+``` python
+dir() # lists created objects
+vars() # dictonary of all created objects
+
+type(myObj) or myObj.__class__ # get Class
+dir(myObject) # List properties / functions of an object
+
+_attr # private attributes
+__func__ # used for builtin methods and variables
+__attr # get namemangled with class name by interpreter to prevent accidental access
 ```
 
 ## Data Types
@@ -18,6 +32,9 @@ mutables, homogeneous data, iterating over list
 a = [66.25, 333, 333, 1, 1234.5]
 a.insert(2, -1)
 print a.count(333), a.count(66.25), a.count('x') # 2 1 0
+
+[t[0] for t in L] # get first element of each list element
+[item for sublist in L for item in sublist] ## flatten then list L
 ```
 
 
@@ -61,18 +78,12 @@ tel.keys() # ['guido', 'jack']
 ```
 
 ## Basics
-``` python
-dir() # lists created objects
-vars() # dictonary of all created objects
 
-myObj.__class__ or type(myObj) # get Class
-dir(myObject) # List properties / functions of an object
+
+``` python
 str(myObj) # return readable explanation of object
 repr(myObj) # return unambiguous explanation of object
 
-_attr # private attributes
-__func__ # used for builtin methods and variables
-__attr # get namemangled with class name by interpreter to prevent accidental access
 
 price = 100.50
 price * tax # >> 12.5625
@@ -119,6 +130,15 @@ else:
     # executed only if the loop didn't "break".
     pass # Do nothing
 ```
+
+## OS
+###display images
+```py
+for image in os.listdir(folder)
+	image_file = os.path.join(folder, image)
+	display(Image(filename= image_file))
+```
+
 
 ### Loops
 ``` python
@@ -176,8 +196,7 @@ class Person(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     
-    
-# Create an engine that stores data in the local directory's
+#Create an engine that stores data in the local directory's
 # sqlalchemy_example.db file.
 engine = create_engine('sqlite:///sqlalchemy_example.db')
  
@@ -237,9 +256,7 @@ u'new person'
 session.query(Address).filter(Address.person == person).all()
 [<sqlalchemy_declarative.Address object at 0x2ee3cd0>]
 
-
 session.query(Address).filter(Address.person == person).one()
-
 
 address = session.query(Address).filter(Address.person == person).one()
 address.post_code
