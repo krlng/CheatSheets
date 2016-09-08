@@ -30,22 +30,22 @@ plot(summary(cities[,2]))
 par(mar=c(5,10,2,2))
 plot(summary(cities[,2]),1:21,yaxt="n",ylab="")
 axis(2, at=1:length(unique(cities[,2])),labels=unique(cities[,2]), las=1)
+```
 
 
-
-parseCsv2 = function(path){
+```r
+parseCsv = function(path){
   df = read.delim(path, header=FALSE) # Read CSV
-  colnames= c("history_action_id","ts_init","init_date_key","init_date_id","ts_lastchange")
-  colnames(df) = colnames
+  colnames(df) = c("history_action_id","ts_init","init_date_key","init_date_id","ts_lastchange")
   df$start_date = as.Date(as.POSIXct(df$ts_init, origin="1970-01-01")) # Convert to  date
   return(df)
 }
 
 
-loadFolder = function(folder="C:/Users/nkreiling/Downloads/bdh_out/see_action_log"){
+loadFolder = function(folder="~/datafolder"){
   temp = list.files(path=folder, pattern="*.csv") # Load all files
   for (i in 1:length(temp)) {
-	assign(temp[i], parseCsv2(paste(folder,temp[i],sep="/")))
+	assign(temp[i], parseCsv(paste(folder,temp[i],sep="/")))
   }
   return (temp)
 }

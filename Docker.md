@@ -2,6 +2,8 @@
 
 ```sh
 docker ps -a | awk '{if(NR>1) print $NF}'
+
+docker exec -it -u 0 containername bash # Get access to root shell
 ```
 
 ##Docker-Machine

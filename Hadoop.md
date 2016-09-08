@@ -42,4 +42,6 @@ Settings: `/etc/hive/conf`
 8. install hive
 9. install 
 
+## HDFS
+Nutzerberechtigungen werden im Namenode nachgeschlagen
 

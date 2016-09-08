@@ -85,6 +85,39 @@ Large | Any | Queries tend to have a natural boundary such as date | Partition t
   - Add JAR to HIVE (`ADD JAR {path}`) 
   - Create a function temporary (`CREATE TEMPORARY FUNCTION {name} AS {package-class-spec};`) or permanently (`CREATE FUNCTION {name} AS {package-class-spec} USING JAR '{hdfs-path}'`)
   - Check function (`SHOW FUNCTION {name};`) and use in HQL
+  - Create Complex Types
+ 
+**Create Complex Types**
+
+``` java
+map(key1,value1,key2,value2)
+array(val1, val2)
+size(Map<K.V>)	
+```
+ 
+**Create UDF**
+
+```java 
+package com.yourpackage.hiveudf;
+import org.apache.hadoop.hive.ql.exec.UDF;
+import org.apache.hadoop.hive.ql.exec.Description;
+import org.apache.hadoop.hive.ql.udf.UDFType;
+
+@Description(
+name = "udf_name",
+value = "_FUNC_(arg1, arg2, ... argN) - A short description for the function",
+extended = "This is more detail about the function, such as syntax, examples."
+)
+@UDFType(deterministic = true, stateful = false)
+public class udf_name extends UDF {
+     public String evaluate(<Type_arg1> arg1,..., <Type_argN> argN){
+          /*
+           * Do something here
+           */
+          return "return the udf result";
+     }
+}
+```
 
 9) Security
  - Authentication

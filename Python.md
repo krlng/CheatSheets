@@ -22,16 +22,60 @@ __func__ # used for builtin methods and variables
 __attr # get namemangled with class name by interpreter to prevent accidental access
 ```
 
-## Data Types
+## Basics
 
+
+``` python
+dir() # lists created objects
+vars() # dictonary of all created objects
+
+myObj.__class__ or type(myObj) # get Class
+dir(myObject) # List properties / functions of an object
+str(myObj) # return readable explanation of object
+repr(myObj) # return unambiguous explanation of object
+
+_attr # private attributes
+__func__ # used for builtin methods and variables
+__attr # get namemangled with class name by interpreter to prevent accidental access
+```
+
+### Numbers
+
+``` python
+price = 100.50
+price * tax # >> 12.5625
+price + _ # >> 113.0625 (adds the last printed value)
+```
+
+### Strings & Printing
+``` python
+
+3 * 'un' + 'ium' # 'unununium' ( 3 times 'un', followed by 'ium')
+'Py' 'thon' # 'Python' (automatically concatting strings next to each other)
+
+print "ab" + str(3) # ab3 => connect str and number
+print '{} is "{!r}, almost {0:.3f}!"'.format('Pi', math.pi, math.pi) # first format pi exactly, then using 3 digits
+print "This %(verb)s a %(noun)s." % {"noun": "test", "verb": "is"}
+
+strString = """This is
+a multiline
+string."""
+```
+
+
+## Data Types
 
 ###Lists 
 mutables, homogeneous data, iterating over list
 
 ``` python
 a = [66.25, 333, 333, 1, 1234.5]
+len(a) # 5
 a.insert(2, -1)
 print a.count(333), a.count(66.25), a.count('x') # 2 1 0
+
+mylist[::2] # every second
+mylist[-3:-1] # third last till last
 
 [t[0] for t in L] # get first element of each list element
 [item for sublist in L for item in sublist] ## flatten then list L
@@ -72,31 +116,26 @@ tel.keys() # ['guido', 'jack']
 ```
 
 ### Structs
+Peforms conversations from python modules to C-Structs
 
 ``` python
 
 ```
 
-## Basics
+## OS
+###display images
+```py
+for image in os.listdir(folder)
+	image_file = os.path.join(folder, image)
+	display(Image(filename= image_file))
+```
 
+
+### Loops
 
 ``` python
-str(myObj) # return readable explanation of object
-repr(myObj) # return unambiguous explanation of object
-
-
-price = 100.50
-price * tax # >> 12.5625
-price + _ # >> 113.0625 (adds the last printed value)
-
-3 * 'un' + 'ium' # 'unununium' ( 3 times 'un', followed by 'ium')
-'Py' 'thon' # 'Python' (automatically concatting strings next to each other)
-
-mylist[::2] # every second
-mylist[-3:-1] # third last till last
-
-print '{} is "{!r}, almost {0:.3f}!"'.format('Pi', math.pi, math.pi) # first format pi exactly, then using 3 digits
-print "This %(verb)s a %(noun)s." % {"noun": "test", "verb": "is"}
+for q, a in zip(questions, answers):
+    print 'What is your {0}?  It is {1}.'.format(q, a)
 
 table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 7678}
 for name, phone in table.items(): 
@@ -108,10 +147,6 @@ for name, phone in table.items():
 
 for i, letter in enumerate(range(a:e))
 	print(i+"->"+letter)
-
-strString = """This is
-a multiline
-string."""
 
 for number in rangelist:
     # Check if number is one of
@@ -129,33 +164,17 @@ else:
     # The "else" clause is optional and is
     # executed only if the loop didn't "break".
     pass # Do nothing
-```
 
-## OS
-###display images
-```py
-for image in os.listdir(folder)
-	image_file = os.path.join(folder, image)
-	display(Image(filename= image_file))
-```
-
-
-### Loops
-``` python
-
-
-for q, a in zip(questions, answers):
-    print 'What is your {0}?  It is {1}.'.format(q, a)
 ```
 
 ###json
 
-``` python
+```python
 with open('relations.json') as data_file:    
  data = json.load(data_file)
 ```
 
-```` python
+```python
 def executeCmd (cur,cmd):
 	try:
 		cur.execute(cmd)
@@ -167,12 +186,12 @@ def executeCmd (cur,cmd):
 		print type(inst)     # the exception instance
 		print inst.args      # arguments stored in .args
 		print inst           # __str__ allows args to be printed 
-````
+```
 
 ## IPython
 
 
-```` python
+```python
 variableName? # object inspector
 %run ipython_script_test.py #run arbitrary scripts from within IPython
 %paste OR %cpaste # to paste longer scripts using multiline-breaks and tabs
@@ -183,12 +202,32 @@ variableName? # object inspector
 myVar = !cmd # run in system shell and store result in variable
 %alias test_alias (cd ch08; ls; cd ..) # define alias
 %bookmark db /home/wesm/Dropbox/ # Create a bookmark 
-````
+```
+
+## Jupyter Notebook (iPython)
+
+<kbd>Esc</kbd> |  command mode
+CM + <kbd>l</kbd>  toggle line numbers
+
+```python
+
+variableName? # object inspector
+%run ipython_script_test.py #run arbitrary scripts from within IPython
+%paste OR %cpaste # to paste longer scripts using multiline-breaks and tabs
+%debug OR %pdb # Post-Mortem Debugging (once OR allways)
+%run -d -b12 myscript # place breakpoint at line 12
+
+%magic # Shows all Magic commands like timeit
+myVar = !cmd # run in system shell and store result in variable
+%alias test_alias (cd ch08; ls; cd ..) # define alias
+%bookmark db /home/wesm/Dropbox/ # Create a bookmark 
+```
+
+
 
 ## SqlAlchemy
 
 ```python
-
 class Person(Base):
     __tablename__ = 'person'
     # Here we define columns for the table person
