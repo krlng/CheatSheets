@@ -5,6 +5,7 @@
 less $(locate my.cnf)
 perl -pi -e 's/\r$//' ~/.tmux.conf # Change Windows line-endings to Linux
 type -a sqlite # Show destination of alias
+whereis <CMD> # show script behind command
 ```
 
 ## OS-Information
@@ -75,6 +76,13 @@ nc -l <port> # on server
 nc -vz <serverIP> <port> # on client
 
 nmap -T4 -A -v -PE -PS22,23 -PA22,23 <serverIP> # Determine if programs listen to ports
+
+# SSH Tunnel
+ssh -L 9000:imgur.com:80 user@example.com
+ssh -nNT -L 9000:imgur.com:80 user@example.com # Port Forwarding without tty
+
+# socks proxy via ssh aufmachen und unter localhost:6677 als SOCKS proxy eintragen
+ssh -D 6677 user01@146.148.123.164
 ```
 
 ## transport data

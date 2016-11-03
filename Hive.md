@@ -34,6 +34,7 @@ Frequently used:
   - Collection: SIZE
   - Date: 
   - Conditional: COALESCE, IF, CASE WHEN
+    ` if `
 - Transactions: ACID for ORC
 
 6) Data Aggregation and Sampling
@@ -86,6 +87,10 @@ Large | Any | Queries tend to have a natural boundary such as date | Partition t
   - Create a function temporary (`CREATE TEMPORARY FUNCTION {name} AS {package-class-spec};`) or permanently (`CREATE FUNCTION {name} AS {package-class-spec} USING JAR '{hdfs-path}'`)
   - Check function (`SHOW FUNCTION {name};`) and use in HQL
   - Create Complex Types
+	  	- Array <data_type>
+	  	- Map <primitive_type, data_type>
+	  	- Struct: <col_name: datatype,...>
+	  	- Uniontype: <data_type, data_Type, ...>
  
 **Create Complex Types**
 
@@ -172,3 +177,12 @@ WHERE d.d_date >= '2001-05-01' and
  - get Settings: `set .`
  - Set Variables: 
  - Logs: `/var/hive/` or `/tmp/logs/`
+
+ 
+ 
+``` sql 
+alter table <tab> set tblproperties ('<prop>' = '<val>')
+show tblproperties <tab> ('<prop>')
+```
+
+  

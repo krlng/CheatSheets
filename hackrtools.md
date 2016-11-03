@@ -123,6 +123,16 @@ Find brakets by typing the brakets
 for f in ./bss_ddl/*; do hive --hivevar params_warehouse_hdfs=/bdhcore -f $f; done;
 ```
 
+## Bash
+```sh
+hist
+!<command> # reruns the last command starting with entered the text from bash history
+!<command>:p # reruns the last command starting with entered the text from bash history
+!! # reruns the last command starting with entered the text from bash history
+!<NR> # reruns the last command starting with entered the text from bash history
+vi !$
+```
+
 ## xdotool
 
 ```sh

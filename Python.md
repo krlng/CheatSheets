@@ -53,9 +53,9 @@ price + _ # >> 113.0625 (adds the last printed value)
 3 * 'un' + 'ium' # 'unununium' ( 3 times 'un', followed by 'ium')
 'Py' 'thon' # 'Python' (automatically concatting strings next to each other)
 
-print "ab" + str(3) # ab3 => connect str and number
-print '{} is "{!r}, almost {0:.3f}!"'.format('Pi', math.pi, math.pi) # first format pi exactly, then using 3 digits
-print "This %(verb)s a %(noun)s." % {"noun": "test", "verb": "is"}
+print("ab" + str(3)) # ab3 => connect str and number
+print('{} is "{!r}, almost {0:.3f}!"'.format('Pi', math.pi, math.pi)) # first format pi exactly, then using 3 digits
+print("This %(verb)s a %(noun)s." % {"noun": "test", "verb": "is"})
 
 strString = """This is
 a multiline
@@ -72,7 +72,7 @@ mutables, homogeneous data, iterating over list
 a = [66.25, 333, 333, 1, 1234.5]
 len(a) # 5
 a.insert(2, -1)
-print a.count(333), a.count(66.25), a.count('x') # 2 1 0
+print(a.count(333), a.count(66.25), a.count('x')) # 2 1 0
 
 mylist[::2] # every second
 mylist[-3:-1] # third last till last
@@ -95,9 +95,13 @@ t[0] # 12345
 unordered, no duplicates, 
 
 ``` python
-basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+basket = ['orange', 'pear', 'orange', 'banana']
 fruit = set(basket)   # create a set without duplicates
+len(fruit) # 3
 'orange' in fruit  # True
+fruit.add('apple')
+
+", ".join(str(e) for e in fruit)
 
 a = set('abracadabra')
 b = set('alacazam')
@@ -118,9 +122,7 @@ tel.keys() # ['guido', 'jack']
 ### Structs
 Peforms conversations from python modules to C-Structs
 
-``` python
 
-```
 
 ## OS
 ###display images
@@ -130,16 +132,32 @@ for image in os.listdir(folder)
 	display(Image(filename= image_file))
 ```
 
+###Subprocess
+```py
+from subprocess import call
+proc = subprocess.Popen(["hive","-e",cmd], stdout=subprocess.PIPE)
+output = proc.stdout.read()
+result = list()
+```
 
-### Loops
+### HTTP.client
+```py
+import http.client
+conn = http.client.HTTPSConnection("localhost", 8080)
+conn.request("HEAD","/index.html")
+conn.request("GET", "/")
+conn.request("POST", "", params, headers)
+```
+
+## Loops
 
 ``` python
 for q, a in zip(questions, answers):
-    print 'What is your {0}?  It is {1}.'.format(q, a)
+    print('What is your {0}?  It is {1}.'.format(q, a))
 
 table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 7678}
 for name, phone in table.items(): 
-    print '{0:10} ==> {1:10d}'.format(name, phone) # print each with a 
+    print('{0:10} ==> {1:10d}'.format(name, phone)) # print each with a 
     
 #Jack       ==>       4098
 #Dcab       ==>       7678
@@ -171,21 +189,22 @@ else:
 
 ```python
 with open('relations.json') as data_file:    
- data = json.load(data_file)
+    data = json.load(data_file) # transforms file to dict
+    print(json.dumps(data, indent=4, sort_keys=True)) # pretty print json
 ```
 
 ```python
 def executeCmd (cur,cmd):
 	try:
 		cur.execute(cmd)
-		print cur.getSchema()
+		print(cur.getSchema())
 	    #Fetch table results
 		for i in cur.fetch():
-			print i
+			print(i)
 	except Exception as inst:
-		print type(inst)     # the exception instance
-		print inst.args      # arguments stored in .args
-		print inst           # __str__ allows args to be printed 
+		print(type(inst))     # the exception instance
+		print(inst.args)      # arguments stored in .args
+		print(inst)           # __str__ allows args to be printed 
 ```
 
 ## IPython
@@ -200,6 +219,7 @@ variableName? # object inspector
 
 %magic # Shows all Magic commands like timeit
 myVar = !cmd # run in system shell and store result in variable
+%bash # run bash scripts
 %alias test_alias (cd ch08; ls; cd ..) # define alias
 %bookmark db /home/wesm/Dropbox/ # Create a bookmark 
 ```
